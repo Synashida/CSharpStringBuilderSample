@@ -31,8 +31,9 @@ namespace StringBuilderSample
         {
             string lines = "";
             DateTime timer = DateTime.Now;
+            long loopMax = (long)loopLimit.Value;
 
-            for (long i = 0; i < loopLimit.Value; i++)
+            for (long i = 0; i < loopMax; i++)
             {
                 lines += string.Format("{0},data{1},{2}{3}", i, i, DateTime.Now, System.Environment.NewLine);
             }
@@ -54,15 +55,15 @@ namespace StringBuilderSample
 
         private void PachimonStringBuilderLoop()
         {
-            StringBuilder lines = new StringBuilder();
+            StringBuilder lines = new StringBuilder(32 * (int)loopLimit.Value);
             DateTime timer = DateTime.Now;
+            long loopMax = (long)loopLimit.Value;
 
-            for (long i = 0; i < loopLimit.Value; i++)
+            for (long i = 0; i < loopMax; i++)
             {
               lines.Append(string.Format("{0},data{1},{2}{3}", i, i, DateTime.Now, System.Environment.NewLine));
             }
             txtPachimon.Text = ((Double)(DateTime.Now.Ticks - timer.Ticks) / 10000000.0).ToString();
-            Update();
         }
     }
 }
