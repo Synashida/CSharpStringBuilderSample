@@ -21,18 +21,9 @@ namespace StringBuilderSample
 
         private void btnExec_Click(object sender, EventArgs e)
         {
-            progress.Init((int)loopLimit.Value);
-            progress.Show();
-            progress.NextMain();
             NormalLoop();
-
-            progress.NextMain();
             StringBuilderLoop();
-
-            progress.NextMain();
             PachimonStringBuilderLoop();
-
-            progress.Hide();
             MessageBox.Show("Done.");
         }
 
@@ -43,25 +34,22 @@ namespace StringBuilderSample
 
             for (long i = 0; i < loopLimit.Value; i++)
             {
-                lines += string.Format("{0},data{1},{2}", i, i, DateTime.Now);
-                progress.NextInFunction();
+                lines += string.Format("{0},data{1},{2}{3}", i, i, DateTime.Now, System.Environment.NewLine);
             }
             txtNormal.Text = ((Double)(DateTime.Now.Ticks - timer.Ticks) / 10000000.0).ToString();
-            Update();
         }
 
         private void StringBuilderLoop()
         {
-            StringBuilder lines = new StringBuilder();
+            StringBuilder lines = new StringBuilder(32 * (int)loopLimit.Value);
             DateTime timer = DateTime.Now;
+            long loopMax = (long)loopLimit.Value;
 
-            for (long i = 0; i < loopLimit.Value; i++)
+            for (long i = 0; i < loopMax; i++)
             {
                 lines.Append(i).Append(",").Append("data").Append(i).Append(",").Append(DateTime.Now);
-                progress.NextInFunction();
             }
             txtStringBuilder.Text = ((Double)(DateTime.Now.Ticks - timer.Ticks) / 10000000.0).ToString();
-            Update();
         }
 
         private void PachimonStringBuilderLoop()
@@ -71,8 +59,7 @@ namespace StringBuilderSample
 
             for (long i = 0; i < loopLimit.Value; i++)
             {
-                lines.Append(string.Format("{0},data{1},{2}", i, i, DateTime.Now));
-                progress.NextInFunction();
+              lines.Append(string.Format("{0},data{1},{2}{3}", i, i, DateTime.Now, System.Environment.NewLine));
             }
             txtPachimon.Text = ((Double)(DateTime.Now.Ticks - timer.Ticks) / 10000000.0).ToString();
             Update();

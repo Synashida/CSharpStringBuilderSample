@@ -26,10 +26,10 @@ namespace StringBuilderSample
 
         public void Init(int maxValue)
         {
-            pgbMain.Maximum = 3;
+            pgbMain.Maximum = 4;
             pgbMain.Value = 0;
             pgbInFunction.Maximum = maxValue;
-            lblMain.Text = "Main 0/3";
+            lblMain.Text = string.Format("Main 0/{0}", pgbMain.Maximum);
             lblInFunction.Text = string.Format("In Function 0/{0}", maxValue);
             Update();
         }
@@ -38,7 +38,7 @@ namespace StringBuilderSample
         {
             pgbMain.Value++;
             pgbInFunction.Value = 0;
-            lblMain.Text = string.Format("Main {0}/3", pgbMain.Value);
+            lblMain.Text = string.Format("Main {0}/{1}", pgbMain.Value, pgbMain.Maximum);
             Update();
         }
 
